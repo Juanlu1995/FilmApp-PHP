@@ -1,0 +1,14 @@
+body{
+    padding-top: 70px;
+}
+
+.editar {
+    color: orange;
+}
+.borrar {
+    color: red;
+}
+
+.cover{
+    width: 30%;
+}

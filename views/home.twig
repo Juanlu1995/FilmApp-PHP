@@ -1,0 +1,31 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Películas</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>Cover</td>
+                <td>Name</td>
+                <td>Date</td>
+                <td>Category</td>
+                <td>Rating</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for film in films %}
+                <tr>
+                    <td><a href="films/{{ film.id }}"><img class="cover" src="{{ film.cover }}" alt="Portada de {{ film.name }}"></a></td>
+                    <td>{{ film.name }}</td>
+                    <td>{{ film.date }}</td>
+                    <td>{{ film.category }}</td>
+                    <td>{{ film.rating }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -13,14 +13,17 @@ $baseDir = str_replace(
 $baseUrl = "http://".$_SERVER['HTTP_HOST'].$baseDir;
 define('BASE_URL',$baseUrl);
 
+$dotenv = new Dotenv\Dotenv(__DIR__.'/..');
+$dotenv->load();
+
 // Instancia de Eloquent
 $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',
-    'host'      => 'localhost',
-    'database'  => 'FilmApp',
-    'username'  => 'manolo',
-    'password'  => 'manolo',
+    'host'      => getenv('DB_HOST'),
+    'database'  => getenv('DB_NAME'),
+    'username'  => getenv('DB_USER'),
+    'password'  => getenv('DB_PASS'),
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',
@@ -33,8 +36,9 @@ $route = $_GET['route'] ?? "/";
 $router = new RouteCollector();
 
 $router->controller("/",App\Controllers\HomeController::class);
-$router->controller("/Films", App\Controllers\FilmsController::class);
-$router->controller("/Users", App\Controllers\UsersController::class);
+$router->controller("/films", App\Controllers\FilmsController::class);
+//$router->controller("/users", App\Controllers\UsersController::class);
+//$router->controller('/api', App\Controllers\ApiController::class);
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 

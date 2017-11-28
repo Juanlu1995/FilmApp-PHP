@@ -2,35 +2,41 @@
 
 {% block content %}
 
-    <div class="containe">
+    <div class="container">
         <h1>{{ webinfo.h1 }}</h1>
+        <form method="post">
+            {#TODO añadir errores a las clases de los divs#}
+
+            <div class="form-group">
+                <label for="inputName">Name</label>
+                <input type="text" class="form-control" id="inputName" name="filmName" placeholder="Film Name"
+                       value="{{ film.name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="inputDate">Date</label>
+                <input type="date" class="form-control" id="inputDate" name="filmDate" placeholder="Film Date"
+                       value="{{ film.date }}">
+            </div>
+
+            <div class="form-group">
+                <label for="inputCover">Cover</label>
+                <input type="text" class="form-control" id="inputCover" name="filmCover" placeholder="Film Cover"
+                       value="{{ film.cover }}">
+            </div>
+
+            <div class="form-group">
+                <label for="inputCategory">Category</label>
+                <input type="text" class="form-control" id="inputCategory" name="filmCategory"
+                       placeholder="Film Category" value="{{ film.category }}">
+            </div>
+
+            <div class="form-group">
+                <label for="inputRating">Rating</label>
+                <input type="text" class="form-control" id="inputRating" name="filmRating" placeholder="Film Rating"
+                       value="{{ film.rating }}">
+            </div>
+        </form>
     </div>
-    <form method="post">
-        {#TODO añadir errores a las clases de los divs#}
 
-        <div class="form-group">
-            <label for="inputName">Name</label>
-            <input type="text" class="form-control" id="inputName" name="filmName" placeholder="Film Name" value="{{ film.name }}">
-        </div>
-
-        <div class="form-group">
-            <label for="inputDate">Date</label>
-            <input type="date" class="form-control" id="inputDate" name="filmDate" placeholder="Film Date" value="{{ film.date }}">
-        </div>
-
-        <div class="form-group">
-            <label for="inputCover">Cover</label>
-            <input type="text" class="form-control" id="inputCover" name="filmCover" placeholder="Film Cover" value="{{ film.cover }}">
-        </div>
-
-        <div class="form-group">
-            <label for="inputCategory">Category</label>
-            <input type="text" class="form-control" id="inputCategory" name="filmCategory" placeholder="Film Category" value="{{ film.category }}">
-        </div>
-
-        <div class="form-group">
-            <label for="inputRating">Rating</label>
-            <input type="text" class="form-control" id="inputRating" name="filmRating" placeholder="Film Rating" value="{{ film.rating }}">
-        </div>
-    </form>
 {% endblock %}
