@@ -16,4 +16,8 @@ class BaseController {
             return BASE_URL.$path;
         }));
     }
+
+    public function render($fileName, $data) {
+        return $this->templateEngine->render($fileName, $data);
+    }
 }
