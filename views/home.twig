@@ -7,25 +7,45 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <td>Cover</td>
-                <td>Name</td>
-                <td>Date</td>
-                <td>Category</td>
-                <td>Rating</td>
+                <td><h4>Cover</h4></td>
+                <td><h4>Name</h4></td>
+                <td><h4>Date</h4></td>
+                <td><h4>Category</h4></td>
+                <td><h4>Rating</h4></td>
+                <td><h4>Edit</h4></td>
+                <td><h4>Delete</h4></td>
+
             </tr>
             </thead>
             <tbody>
             {% for film in films %}
                 <tr>
-                    <td><a href="films/{{ film.id }}"><img class="cover" src="{{ film.cover }}" alt="Portada de {{ film.name }}"></a></td>
+                    <td><a href="films/{{ film.id }}"><img class="cover" src="{{ film.cover }}"
+                                                           alt="Portada de {{ film.name }}"></a></td>
                     <td>{{ film.name }}</td>
                     <td>{{ film.date }}</td>
                     <td>{{ film.category }}</td>
                     <td>{{ film.rating }}</td>
+                    <td>
+                        <a href="/distros/edit/{{ distro.id }}" class="editar btn btn-link">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <form action="/films" method="POST">
+                            <input type="hidden" name="id" value="{{ distro.id }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-link btn-alert"><span class="glyphicon glyphicon-trash"
+                                                                                       aria-hidden="true"></span>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
+
+
 
 {% endblock %}
