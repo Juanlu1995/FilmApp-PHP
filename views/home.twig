@@ -32,10 +32,10 @@
                         </a>
                     </td>
                     <td>
-                        <form action="/films" method="POST">
+                        <form action="/films/delete" method="POST">
                             <input type="hidden" name="id" value="{{ distro.id }}">
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-link btn-alert"><span class="glyphicon glyphicon-trash"
+                            <button type="submit" class="btn btn-link btn-alert borrar"><span class="glyphicon glyphicon-trash"
                                                                                        aria-hidden="true"></span>
                             </button>
                         </form>
@@ -45,7 +45,5 @@
             </tbody>
         </table>
     </div>
-
-
 
 {% endblock %}

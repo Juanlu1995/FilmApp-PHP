@@ -135,6 +135,7 @@ class FilmsController extends BaseController {
             $validator->add('category:Category', 'required', [], $requiredFieldMessageError);
 
             // Extraemos los datos enviados por POST
+            $film['id'] = $id;
             $film['name'] = htmlspecialchars(trim($_POST['name']));
             $film['date'] = date("Y-m-d", strtotime($_POST['date']));
             $film['category'] = htmlspecialchars(trim($_POST['category']));
@@ -142,14 +143,14 @@ class FilmsController extends BaseController {
             $film['rating'] = htmlspecialchars(trim($_POST['rating'])) ?? array();
 
             if ($validator->validate($_POST)) {
-                $film = new Film([
+                $film = Film::where('id',$id)->update([
+                    'id' => $film[$id],
                     'name' => $film['name'],
                     'date' => $film['date'],
                     'category' => $film['category'],
                     'cover' => $film['cover'],
                     'rating' => $film['rating']
                 ]);
-                $film->save();
 
                 // Si se guarda sin problemas se redirecciona la aplicación a la página de inicio
                 header('Location: ' . BASE_URL);
@@ -157,14 +158,24 @@ class FilmsController extends BaseController {
             } else {
                 $errors = $validator->getMessages();
             }
-
-            // Si se guarda sin problemas se redirecciona la aplicación a la página de inicio
-            return $this->render('formFilm.twig', [
-                'film' => $film,
-                'errors' => $errors,
-                'webInfo' => $webInfo
-            ]);
         }
+        return $this->render('formFilm.twig', [
+            'film' => $film,
+            'errors' => $errors,
+            'webInfo' => $webInfo
+        ]);
+    }
+
+
+    /**
+     * Ruta [DELETE] /films/delete para eliminar la distribución con el código pasado
+     */
+    public function deleteIndex(){
+        $id = $_REQUEST['id'];
+
+        $film = Film::destroy($id);
+
+        header("Location: ". BASE_URL);
     }
 
 
