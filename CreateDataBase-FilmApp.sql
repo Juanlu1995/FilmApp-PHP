@@ -35,8 +35,8 @@ CREATE TABLE `films` (
   `cover` text NOT NULL,
   `category` tinytext NOT NULL,
   `rating` int(1) NOT NULL,
-  `create_at` datetime NOT NULL,
-  `update_at` datetime NOT NULL
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
