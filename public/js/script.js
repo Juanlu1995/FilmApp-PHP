@@ -1,5 +1,5 @@
 $(function () {
-   $('inputBorrar').on({
+   $('#inputBorrar').on({
        click:function () {
             $("#modal").modal();
        }

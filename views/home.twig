@@ -49,23 +49,25 @@
 
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">¿Estás seguro que desea eliminarlo?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="modalAceptar">Aceptar</button>
-                </div>
-            </div>
+<!-- Modal -->
+  <div class="modal fade" id="modal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">¿Estás seguro que desea borrar ésta película?</h4>
         </div>
-    </div>
+        <div class="modal-body">
+          <p>No podrá deshacer ésta opción</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" form="deleteForm">Continuar</button>
+
+        </div>
+      </div>
 {% endblock %}
 
 {% block js %}
