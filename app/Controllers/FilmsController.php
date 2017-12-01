@@ -58,7 +58,7 @@ class FilmsController extends BaseController {
                     'date' => $film['date'],
                     'category' => $film['category'],
                     'cover' => $film['cover'],
-                    'rating' => $film['rating']
+                    'rating' => $film['rating'],
                 ]);
                 $film->save();
 
