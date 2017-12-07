@@ -17,7 +17,10 @@ $baseUrl = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? 'https://'.$_SERVER['HTTP
 define('BASE_URL',$baseUrl);
 
 
-if(!file_exists(__DIR__.'../.env')){
+if(file_exists(__DIR__.'../.env')){
+    $dotenv = new Dotenv\Dotenv(__DIR__.'/..');
+    $dotenv->load();
+}else{
     $dotenv = new Dotenv\Dotenv(__DIR__.'/..');
     $dotenv->load();
 }
