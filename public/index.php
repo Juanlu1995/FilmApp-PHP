@@ -11,10 +11,10 @@ $baseDir = str_replace(
 );
 
 
-if (empty($_SERVER('HTTPS'))){
-    $baseUrl = "http://".$_SERVER['HTTP_HOST'].$baseDir;
-}else{
+if (!empty($_SERVER('HTTPS'))){
     $baseUrl = "https://".$_SERVER['HTTP_HOST'].$baseDir;
+}else{
+    $baseUrl = "http://".$_SERVER['HTTP_HOST'].$baseDir;
 }
 define('BASE_URL',$baseUrl);
 
