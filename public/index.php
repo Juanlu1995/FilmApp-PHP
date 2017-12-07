@@ -2,7 +2,6 @@
 require_once '../vendor/autoload.php';
 
 require_once '../helper.php';
-dameDato($_SERVER);
 
 use Phroute\Phroute\RouteCollector;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -18,7 +17,7 @@ $baseUrl = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? 'https://'.$_SERVER['HTTP
 define('BASE_URL',$baseUrl);
 
 
-if(file_exists(__DIR__.'../.env')){
+if(!file_exists(__DIR__.'../.env')){
     $dotenv = new Dotenv\Dotenv(__DIR__.'/..');
     $dotenv->load();
 }
