@@ -13,7 +13,7 @@ $baseDir = str_replace(
     $_SERVER['SCRIPT_NAME']
 );
 
-$baseUrl = $_SERVER['REQUEST_SCHEME'].$_SERVER['HTTP_HOST'].$baseDir;
+$baseUrl = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? 'https://'.$_SERVER['HTTP_HOST'].$baseDir : 'http://'.$_SERVER['HTTP_HOST'].$baseDir;
 
 define('BASE_URL',$baseUrl);
 
