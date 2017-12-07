@@ -20,10 +20,8 @@ define('BASE_URL',$baseUrl);
 if(file_exists(__DIR__.'../.env')){
     $dotenv = new Dotenv\Dotenv(__DIR__.'/..');
     $dotenv->load();
-}else{
-    $dotenv = new Dotenv\Dotenv(__DIR__.'/..');
-    $dotenv->load();
 }
+
 // Instancia de Eloquent
 $capsule = new Capsule;
 $capsule->addConnection([
