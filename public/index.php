@@ -10,8 +10,14 @@ $baseDir = str_replace(
     $_SERVER['SCRIPT_NAME']
 );
 
-$baseUrl = "http://".$_SERVER['HTTP_HOST'].$baseDir;
+
+if (empty($_SERVER('HTTPS'))){
+    $baseUrl = "http://".$_SERVER['HTTP_HOST'].$baseDir;
+}else{
+    $baseUrl = "https://".$_SERVER['HTTP_HOST'].$baseDir;
+}
 define('BASE_URL',$baseUrl);
+
 
 if(file_exists(__DIR__.'../.env')){
     $dotenv = new Dotenv\Dotenv(__DIR__.'/..');
