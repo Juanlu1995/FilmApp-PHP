@@ -1,5 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
+require_once '../helpper.php';
+dameDato($_SERVER);
 
 use Phroute\Phroute\RouteCollector;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -10,7 +12,7 @@ $baseDir = str_replace(
     $_SERVER['SCRIPT_NAME']
 );
 
-$baseUrl = !empty($_SERVER('HTTPS')) ? "https://".$_SERVER['HTTP_HOST'].$baseDir : "http://".$_SERVER['HTTP_HOST'].$baseDir;
+$baseUrl = $_SERVER['REQUEST_SCHEME'].$_SERVER['HTTP_HOST'].$baseDir;
 
 define('BASE_URL',$baseUrl);
 
