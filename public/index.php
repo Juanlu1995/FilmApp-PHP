@@ -1,7 +1,5 @@
 <?php
 require_once '../vendor/autoload.php';
-require_once '../helpper.php';
-dameDato($_SERVER);
 
 use Phroute\Phroute\RouteCollector;
 use Illuminate\Database\Capsule\Manager as Capsule;
