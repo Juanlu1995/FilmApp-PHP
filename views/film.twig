@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+{% block css %}
+    <link rel="stylesheet" href="{{ '' | url }}css/detail.css">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div>
+        <h1>{{ film.name }}</h1>
+
+        <div class="col-sm-6 col-md-6 col-xs-12 image-container">
+            <img src="{{ film.cover }}" alt="{{ film.name }} cover">
+        </div>
+        <h3>Fecha de salida: </h3>{{ film.date }}
+        <h3>Categorias: </h3> {{ film.category }}
+        <div>
+            <h3>Rating: </h3>
+            <p class="rating">{{ film.rating }}</p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

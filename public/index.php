@@ -44,7 +44,7 @@ $router = new RouteCollector();
 $router->controller("/",App\Controllers\HomeController::class);
 $router->controller("/films", App\Controllers\FilmsController::class);
 //$router->controller("/users", App\Controllers\UsersController::class);
-//$router->controller('/api', App\Controllers\ApiController::class);
+$router->controller('/api', App\Controllers\ApiController::class);
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
