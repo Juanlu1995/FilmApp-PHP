@@ -90,8 +90,8 @@ class FilmsController extends BaseController {
 
         $webInfo = [
             'h1' => 'Añadir Película',
-            'submit' => 'Añadir',
-            'method' => 'POST'
+            'submit' => 'Editar',
+            'method' => 'PUT'
         ];
 
         //Recuperamos los datos
@@ -138,13 +138,13 @@ class FilmsController extends BaseController {
             $film['id'] = $id;
             $film['name'] = htmlspecialchars(trim($_POST['name']));
             $film['date'] = date("Y-m-d", strtotime($_POST['date']));
-            $film['category'] = htmlspecialchars(trim($_POST['category']));
+            $film['category'] = $_POST['category'];
             $film['cover'] = htmlspecialchars(trim($_POST['cover'])) ?? array();
             $film['rating'] = htmlspecialchars(trim($_POST['rating'])) ?? array();
 
             if ($validator->validate($_POST)) {
                 $film = Film::where('id',$id)->update([
-                    'id' => $film[$id],
+                    'id' => $film['id'],
                     'name' => $film['name'],
                     'date' => $film['date'],
                     'category' => $film['category'],

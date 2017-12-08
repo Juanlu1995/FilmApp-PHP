@@ -1,5 +1,7 @@
 {% extends "layout.twig" %}
-
+{% block css %}
+    <link rel="stylesheet" href="{{ '' | url }}css/bootstrap-tokenfield.min.css">
+{% endblock %}
 {% block content %}
 
     <div class="container">
@@ -27,7 +29,7 @@
 
             <div class="form-group">
                 <label for="category">Category</label>
-                <input type="text" class="form-control" id="category" name="category"
+                <input type="text" class="typeahead form-control" id="category" name="category"
                        placeholder="Film Category" value="{{ film.category }}">
             </div>
 
@@ -42,4 +44,11 @@
         </form>
     </div>
 
+{% endblock %}
+
+{% block js %}
+    <script src="{{ '' | url }}js/bloodhound/bloodhound.js"></script>
+    <script src="{{ '' | url }}js/typehead/typehead.js"></script>
+    <script src="{{ '' | url }}js/tokenfield/bootstrap-tokenfield.min.js"></script>
+    <script src="{{ '' | url }}js/tokenfield/tokenfield-FilmApp.js"></script>
 {% endblock %}
