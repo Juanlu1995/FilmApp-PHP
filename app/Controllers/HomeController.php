@@ -4,7 +4,7 @@ namespace App\Controllers;
 use App\Controllers\Auth\AuthController;
 use App\Controllers\Auth\RegisterController;
 
-class HomeController {
+class HomeController extends BaseController {
 
     /**
      * Ruta / donde se muestra la página de inicio del proyecto.
@@ -50,5 +50,11 @@ class HomeController {
         $auth = new AuthController();
 
         return $auth->getLogout();
+    }
+    public function get404($route){
+        $webInfo = [
+            'title' => $route
+        ];
+        return $this->render("404.twig",[$webInfo]);
     }
 }

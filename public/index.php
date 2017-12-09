@@ -78,13 +78,16 @@ $router->group(['before' => 'noAuth'], function ($router){
 $router->get("/",['App\Controllers\HomeController','getIndex']);
 $router->get("/films/{id}", ['App\Controllers\FilmsController', 'getIndex']);
 $router->post("/films/{id}", ['App\Controllers\FilmsController', 'postIndex']);
-//$router->controller("/users", App\Controllers\UsersController::class);
+$router->get("/404/{route}", ['App\Controllers\HomeController', 'get404']);
+
 $router->controller('/api', App\Controllers\ApiController::class);
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
 $method = $_REQUEST['_method'] ?? $_SERVER['REQUEST_METHOD'];
-
-$response = $dispatcher->dispatch($method,$route);
-
+try {
+    $response = $dispatcher->dispatch($method, $route);
+}catch (\Phroute\Phroute\Exception\HttpRouteNotFoundException $ex){
+    $response = $dispatcher->dispatch("GET", "/404/".$route);
+}
 echo $response;
