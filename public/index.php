@@ -6,6 +6,8 @@ require_once '../helper.php';
 use Phroute\Phroute\RouteCollector;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
+
+session_start();
 $baseDir = str_replace(
     basename($_SERVER['SCRIPT_NAME']),
     "",
@@ -41,8 +43,41 @@ $route = $_GET['route'] ?? "/";
 
 $router = new RouteCollector();
 
-$router->controller("/",App\Controllers\HomeController::class);
-$router->controller("/films", App\Controllers\FilmsController::class);
+
+$router->filter('auth',function (){
+    if (!isset($_SESSION['userId'])){
+        header('Location: ' . BASE_URL);
+        return false;
+    }
+});
+$router->group(['before'=>'auth'], function ($router){
+    $router->get('/films/new', ['\App\Controllers\FilmsController', 'getNew']);
+    $router->post('/films/new', ['\App\Controllers\FilmsController', 'postNew']);
+    $router->get('/films/edit/{id}', ['\App\Controllers\FilmsController', 'getEdit']);
+    $router->put('/films/edit/{id}', ['\App\Controllers\FilmsController', 'putEdit']);
+    $router->delete('/films/', ['\App\Controllers\FilmsController', 'deleteIndex']);
+    $router->get('/logout', ['\App\Controllers\HomeController', 'getLogout']);
+});
+
+
+$router->filter('noAuth', function(){
+    if( isset($_SESSION['userId'])){
+        header('Location: '. BASE_URL);
+        return false;
+    }
+});
+$router->group(['before' => 'noAuth'], function ($router){
+    $router->get('/login', ['\App\Controllers\HomeController', 'getLogin']);
+    $router->post('/login', ['\App\Controllers\HomeController', 'postLogin']);
+    $router->get('/registro', ['\App\Controllers\HomeController', 'getRegistro']);
+    $router->post('/registro', ['\App\Controllers\HomeController', 'postRegistro']);
+});
+
+
+
+$router->get("/",['App\Controllers\HomeController','getIndex']);
+$router->get("/films/{id}", ['App\Controllers\FilmsController', 'getIndex']);
+$router->post("/films/{id}", ['App\Controllers\FilmsController', 'postIndex']);
 //$router->controller("/users", App\Controllers\UsersController::class);
 $router->controller('/api', App\Controllers\ApiController::class);
 

@@ -1,0 +1,37 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <div class="container">
+
+        <form class="form-signin" method="post">
+            <h2 class="form-signin-heading">Registro</h2>
+            <div class="form-group {% if errors['name'] %}has-error{% endif %}">
+                <label for="name" class="sr-only">Email</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" autofocus>
+            </div>
+            {{ generateAlert(errors, 'email') }}
+            <div class="form-group {% if errors['inputEmail'] %}has-error{% endif %}">
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email" autofocus>
+            </div>
+            {{ generateAlert(errors, 'email') }}
+            <div class="form-group {% if errors['inputPassword1'] %}has-error{% endif %}">
+                <label for="password1" class="sr-only">Password</label>
+                <input type="password" id="password1" class="form-control" name="password1" placeholder="Password">
+            </div>
+            {{ generateAlert(errors, 'password1') }}
+            <div class="form-group {% if errors['inputPassword2'] %}has-error{% endif %}">
+                <label for="password2" class="sr-only">Password</label>
+                <input type="password" id="password2" class="form-control" name="password2" placeholder="Confirma Password">
+            </div>
+            {{ generateAlert(errors, 'password2') }}
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Recuérdame
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
+        </form>
+
+    </div>
+{% endblock %}
