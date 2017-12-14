@@ -40,6 +40,7 @@ h1{
 }
 img{
     animation: bounceInLeft 2s;
+    max-width: 80%;
 }
 .rating{
     font-size: 6em;

@@ -10,7 +10,10 @@ body{
 }
 
 .cover{
-    max-width: 30%;
+    max-height: 10%;
+}
+.dato{
+    font-size: 1.5em;
 }
 
 .tt-query {
