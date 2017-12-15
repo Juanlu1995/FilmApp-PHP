@@ -18,6 +18,10 @@ $baseUrl = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? 'https://'.$_SERVER['HTTP
 
 define('BASE_URL',$baseUrl);
 
+/**
+ * Para que funcione tanto en local como en un servidor remoto, comprobamos que tengamos un archivo .env en nuestro proyecto,
+ * si es así, lo carga.
+ */
 
 if(file_exists(__DIR__.'/../.env')){
     $dotenv = new Dotenv\Dotenv(__DIR__.'/..');
@@ -43,13 +47,18 @@ $route = $_GET['route'] ?? "/";
 
 $router = new RouteCollector();
 
-
+/**
+ *Creamos el filtro para los usuarios logueados
+ */
 $router->filter('auth',function (){
     if (!isset($_SESSION['userId'])){
         header('Location: ' . BASE_URL);
         return false;
     }
 });
+/**
+ * Damos las rutas disponibles SÓLO para los usuarios logueados
+ */
 $router->group(['before'=>'auth'], function ($router){
     $router->get('/films/new', ['\App\Controllers\FilmsController', 'getNew']);
     $router->post('/films/new', ['\App\Controllers\FilmsController', 'postNew']);
@@ -59,13 +68,18 @@ $router->group(['before'=>'auth'], function ($router){
     $router->get('/logout', ['\App\Controllers\HomeController', 'getLogout']);
 });
 
-
+/**
+ * Creamos el filtro para los usuarios no registrados
+ */
 $router->filter('noAuth', function(){
     if( isset($_SESSION['userId'])){
         header('Location: '. BASE_URL);
         return false;
     }
 });
+/**
+ * Creamos las rutas disponibles SÓLO para los usuarios NO logueados
+ */
 $router->group(['before' => 'noAuth'], function ($router){
     $router->get('/login', ['\App\Controllers\HomeController', 'getLogin']);
     $router->post('/login', ['\App\Controllers\HomeController', 'postLogin']);
@@ -74,7 +88,7 @@ $router->group(['before' => 'noAuth'], function ($router){
 });
 
 
-
+// Rutas sin filtro
 $router->get("/",['App\Controllers\HomeController','getIndex']);
 $router->get("/films/{id}", ['App\Controllers\FilmsController', 'getIndex']);
 $router->post("/films/{id}", ['App\Controllers\FilmsController', 'postIndex']);
@@ -84,6 +98,13 @@ $router->controller('/api', App\Controllers\ApiController::class);
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 
+/**
+ * Probamos si recibimos alguna variable '_method'
+ * Si existe, llamamos a la ruta con dicho metodo,
+ * y si no existe, le damos al método el valor recibido en la variable superglobal '$_SERVER[REQUEST_METHOD]'
+ *
+ * Si salta la excepción de la ruta no encontrada creamos una nueva ruta hacia la página de error 404
+ */
 $method = $_REQUEST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 try {
     $response = $dispatcher->dispatch($method, $route);
