@@ -10,11 +10,27 @@ use App\Controllers\BaseController;
 use App\Models\User;
 use Sirius\Validation\Validator;
 
+/**
+ * Class RegisterController donde se controla el registro de usuarios
+ * @package App\Controllers\Auth
+ */
 class RegisterController extends BaseController{
+    /**
+     * Ruta /registro donde se muestra la página de registro de usuarios
+     *
+     * @return String Render de la página
+     */
     public function getRegister(){
         return $this->render('auth/register.twig',[]);
     }
 
+
+    /**
+     * Ruta /registro donde se manda el formulario de la página de registro de usuarios
+     *
+     * @return String página de inicio si ha salido el registro satisfactorio o
+     * Render de la página con erroes si el registro ha fallado
+     */
     public function postRegister(){
         $validator = new Validator();
 

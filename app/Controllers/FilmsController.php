@@ -5,6 +5,10 @@ namespace App\Controllers;
 use App\Models\Film;
 use Sirius\Validation\Validator;
 
+/**
+ * Class FilmsController controlador RESTfull de films
+ * @package App\Controllers
+ */
 class FilmsController extends BaseController {
     /**
      * Ruta [GET] /films/new que muestra el formulario de añadir una nueva película
@@ -30,6 +34,12 @@ class FilmsController extends BaseController {
         ]);
     }
 
+    /**
+     * Ruta [POST] /films/new que manda el formulario de añadir una nueva película. Si se efectúa correctamente nos
+     * manda a la página principal
+     *
+     * @return String Render de la web con toda la información con errores si se han marcado dichos errores
+     */
     public function postNew() {
         $webInfo = [
             'h1'        => 'Añadir Película',
@@ -110,6 +120,7 @@ class FilmsController extends BaseController {
     /**
      * Ruta [PUT] /films/edit/{id} que actualiza toda la información de una película. Se usa el verbo
      * put porque la actualización se realiza en todos los campos de la base de datos.
+     * Si se efectúa correctamente nos manda a la página principal
      *
      * @param id int Código de la película.
      *

@@ -6,6 +6,7 @@ class BaseController {
 
     public $templateEngine;
 
+
     public function __construct() {
         //Inicializar el motor de template
         $loader = new \Twig_Loader_Filesystem('../views');
@@ -33,9 +34,8 @@ class BaseController {
                     $errorList .= "{$error}<br>";
                 }
 
-                // Y se inserta dicha lista en un bloque alert (ver documentación bootstrap 3.3.7)
-                // El alert se carga con sintaxis nowdoc. Para más info:
-                // http://php.net/manual/es/language.types.string.php#language.types.string.syntax.nowdoc
+                // Y se inserta dicha lista en un bloque alert de bootstrap 3.3.7
+                // El alert se carga con sintaxis nowdoc
                 $alert = <<<ALERT
                 <div class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

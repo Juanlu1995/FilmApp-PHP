@@ -5,12 +5,25 @@ use App\Controllers\BaseController;
 use App\Models\User;
 use Sirius\Validation\Validator;
 
+/**
+ * Class AuthController clase donde se controla el logueo de usuarios
+ * @package App\Controllers\Auth
+ */
 class AuthController extends BaseController {
 
+    /**
+     * @return string Render de la página de logueo
+     */
     public function getLogin(){
         return $this->render('auth/login.twig',[]);
     }
 
+    /**
+     * Ruta /login donde se mandan los datos de la página de logueo de usuarios.
+     * Si hay errores, se hace render de la página de logueo con los errores
+     *
+     * @return null|string redirección a página principal o Render de la página con errores
+     */
     public function postLogin(){
         $validator = new Validator();
 
@@ -38,6 +51,9 @@ class AuthController extends BaseController {
         ]);
     }
 
+    /**
+     * Ruta /logout en la cual se deslogua al usuario
+     */
     public function getLogout(){
         unset($_SESSION['userId']);
         unset($_SESSION['userName']);
