@@ -7,7 +7,7 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\BaseController;
-use App\Models\Invitations;
+use App\Models\Invitation;
 use App\Models\User;
 use Sirius\Validation\Validator;
 
@@ -63,11 +63,11 @@ class RegisterController extends BaseController {
     }
 
 
-
-
-
-
-
+    /**
+     * Ruta /invitacion donde de manda el formulario de la página para mandar una invitación
+     *
+     * @return string Render de la página de invitación.
+     */
     public function getInvitacion() {
         return $this->render('auth/invitation/invitation.twig', []);
     }
@@ -80,12 +80,14 @@ class RegisterController extends BaseController {
         $validator->add('email:Email', 'email', [], "El campo {label} debe contenet un email válido");
 
         if ($validator->validate($_POST)) {
-            $invitation = new Invitations();
+            $invitation = new Invitation();
 
-            $invitation->email = $_POST['email'];
-            $invitation->used = 0;
+            if (!Invitation::where('email',$_POST['email'])->first()){
+                $invitation->email = $_POST['email'];
+                $invitation->used = 0;
 
-            $invitation->save();
+                $invitation->save();
+            }
 
             return $this->render('auth/invitation/invitationSuccess.twig', []);
         } else {

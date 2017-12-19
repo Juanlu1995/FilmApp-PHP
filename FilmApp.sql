@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-12-2017 a las 21:23:01
+-- Tiempo de generación: 19-12-2017 a las 18:40:22
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -60,6 +60,29 @@ INSERT INTO `films` (`id`, `name`, `date`, `cover`, `category`, `rating`, `creat
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `invitations`
+--
+
+CREATE TABLE `invitations` (
+  `id` int(11) NOT NULL,
+  `email` text NOT NULL,
+  `used` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `invitations`
+--
+
+INSERT INTO `invitations` (`id`, `email`, `used`, `created_at`, `updated_at`) VALUES
+(1, 'juanlu_21@hotmail.com', 0, '2017-12-19 18:28:51', '2017-12-19 18:28:51'),
+(2, 'juanlu@hotmail.com', 0, '2017-12-19 18:31:31', '2017-12-19 18:31:31'),
+(3, 'juanlu@hotmail.com', 0, '2017-12-19 18:32:14', '2017-12-19 18:32:14');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `user`
 --
 
@@ -90,6 +113,12 @@ ALTER TABLE `films`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `invitations`
+--
+ALTER TABLE `invitations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `user`
 --
 ALTER TABLE `user`
@@ -104,6 +133,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `films`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `invitations`
+--
+ALTER TABLE `invitations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
