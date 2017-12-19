@@ -64,7 +64,7 @@ class RegisterController extends BaseController {
 
 
     /**
-     * Ruta /invitacion donde de manda el formulario de la página para mandar una invitación
+     * Ruta [GET] /invitacion donde de manda el formulario de la página para mandar una invitación
      *
      * @return string Render de la página de invitación.
      */
@@ -72,6 +72,16 @@ class RegisterController extends BaseController {
         return $this->render('auth/invitation/invitation.twig', []);
     }
 
+    /**
+     * Ruta [POST] /invitacion donde de manda la informacion del formulario de la página para mandar una invitación
+     *
+     * Añadimos a la base de datos una nueva invitación con el email dado e informamos al usuario.
+     *
+     * Si el correo ya existe en la base de datos de invitacion, se da la información al usuario de que la operación ha
+     * sido efectuada, pero no se añade a la base de datos
+     *
+     * @return string Render de la página de invitación.
+     */
     public function postInvitacion() {
 
         $validator = new Validator();
