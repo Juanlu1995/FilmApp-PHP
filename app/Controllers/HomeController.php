@@ -77,6 +77,18 @@ class HomeController extends BaseController {
         return $auth->getLogout();
     }
 
+
+    public function getInvitacion(){
+        $reg = new RegisterController();
+
+        return $reg->getInvitacion();
+    }
+
+    public function postInvitacion(){
+        $reg = new RegisterController();
+
+        return $reg->postInvitacion();
+    }
     /**
      * Sólo accedemos a esta página cuando la página que buscamos no ha sido encontrada
      * @param $route String ruta a la cual el usuario a intentado acceder

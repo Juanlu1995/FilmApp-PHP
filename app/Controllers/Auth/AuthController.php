@@ -25,6 +25,7 @@ class AuthController extends BaseController {
      * @return null|string redirección a página principal o Render de la página con errores
      */
     public function postLogin(){
+
         $validator = new Validator();
 
         $validator->add('email:Email','required',[],"El campo {label} es requerido");
@@ -33,14 +34,16 @@ class AuthController extends BaseController {
 
         if ($validator->validate($_POST)){
             $user = User::where('email',$_POST['email'])->first();
-            if (password_verify($_POST['password'],$user->password)){
-                $_SESSION['userId'] = $user->id;
-                $_SESSION['userName'] = $user->name;
-                $_SESSION['userEmail'] = $user->email;
+            if ($user) {
+                if (password_verify($_POST['password'], $user->password)) {
+                    $_SESSION['userId'] = $user->id;
+                    $_SESSION['userName'] = $user->name;
+                    $_SESSION['userEmail'] = $user->email;
 
-                header('Location: '. BASE_URL);
+                    header('Location: ' . BASE_URL);
 
-                return null;
+                    return null;
+                }
             }
             $validator->addMessage('authError','Los datos son incorrectos');
         }

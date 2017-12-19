@@ -85,6 +85,8 @@ $router->group(['before' => 'noAuth'], function ($router){
     $router->post('/login', ['\App\Controllers\HomeController', 'postLogin']);
     $router->get('/registro', ['\App\Controllers\HomeController', 'getRegistro']);
     $router->post('/registro', ['\App\Controllers\HomeController', 'postRegistro']);
+    $router->get('/invitacion', ['\App\Controllers\HomeController', 'getInvitacion']);
+    $router->post('/invitacion', ['\App\Controllers\HomeController', 'postInvitacion']);
 });
 
 
